@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coming Soon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(135deg, #f6d365, #fda085);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      animation: floatIn 1s ease-out;
+    }
+
+    @keyframes floatIn {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .emoji {
+      font-size: 3rem;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #e74c3c;
+      margin: 20px 0 10px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      justify-content: center;
+    }
+
+    input[type="email"] {
+      padding: 12px;
+      border: 2px solid #e67e22;
+      border-radius: 5px 0 0 5px;
+      font-size: 1rem;
+      width: 60%;
+    }
+
+    button {
+      padding: 12px 20px;
+      border: none;
+      background-color: #e67e22;
+      color: white;
+      font-size: 1rem;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      background-color: #d35400;
+    }
+
+    .thanks-message {
+      display: none;
+      color: #2ecc71;
+      margin-top: 15px;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="emoji">🎉</div>
+    <h1>We're Cooking Up Something Fun!</h1>
+    <p>Drop your email and we’ll let you know when it’s ready!</p>
+    <form onsubmit="event.preventDefault(); showThankYou();">
+      <input type="email" placeholder="Your email" required />
+      <button type="submit">Notify Me</button>
+    </form>
+    <div class="thanks-message" id="thanks">Thanks! You're on the list 🎈</div>
+  </div>
+
+  <script>
+    function showThankYou() {
+      document.getElementById("thanks").style.display = "block";
+    }
+  </script>
+</body>
+</html>
