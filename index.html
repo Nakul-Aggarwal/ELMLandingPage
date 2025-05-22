@@ -107,17 +107,45 @@
     <div class="emoji">🎉</div>
     <h1>We're Cooking Up Something Fun!</h1>
     <p>Drop your email and we’ll let you know when it’s ready!</p>
-    <form onsubmit="event.preventDefault(); showThankYou();">
-      <input type="email" placeholder="Your email" required />
+    <form id="emailForm" onsubmit="event.preventDefault(); submitForm();">
+      <input type="email" name="email" placeholder="Your email" required />
       <button type="submit">Notify Me</button>
     </form>
     <div class="thanks-message" id="thanks">Thanks! You're on the list 🎈</div>
   </div>
 
-  <script>
-    function showThankYou() {
-      document.getElementById("thanks").style.display = "block";
+<script>
+    function submitForm() {
+        const form = document.getElementById('emailForm');
+        const emailInput = form.querySelector('input[name="email"]');
+        const email = emailInput.value;
+        const thanksMessage = document.getElementById("thanks");
+
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbwxkq26j2DfTeZMA6YQi58Gv68TJRX2mkDYvC_YkfH5X0QExG6JwnWdAdO9HlNp6iQ/exec';
+
+        fetch(scriptUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                'email': email
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+                thanksMessage.style.display = "block";
+                form.reset(); // Clear the form
+            } else {
+                console.error('Form submission failed:', response.statusText);
+                alert('There was an error submitting your email. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error submitting your email. Please try again.');
+        });
     }
-  </script>
+</script>
 </body>
 </html>
